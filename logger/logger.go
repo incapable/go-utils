@@ -7,12 +7,16 @@ import (
 	"os"
 )
 
+func init() {
+	initLogger()
+}
+
 var GlobalLogger *zap.Logger
 
 // global logger configuration
-func init() {
+func setupLogger(debug bool) {
 	var (
-		debug = program.ReadProgramFlag("debug")
+		toFile = program.ReadProgramFlag("logToFile")
 
 		outFilter = zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
 			return lvl == zapcore.InfoLevel || (debug && lvl == zapcore.DebugLevel)
@@ -44,14 +48,21 @@ func init() {
 
 	console := zapcore.NewConsoleEncoder(encoderConfig)
 
-	file, err := os.Create("log")
-	if err != nil {
-		panic("Could not create log file")
-	}
+	if toFile {
+		file, err := os.Create("log")
+		if err != nil {
+			panic("Could not create log file")
+		}
 
-	GlobalLogger = zap.New(zapcore.NewTee(
-		zapcore.NewCore(console, zapcore.AddSync(stdOut), outFilter),
-		zapcore.NewCore(console, zapcore.AddSync(stdErr), errFilter),
-		zapcore.NewCore(console, zapcore.AddSync(file), zap.DebugLevel),
-	))
+		GlobalLogger = zap.New(zapcore.NewTee(
+			zapcore.NewCore(console, zapcore.AddSync(stdOut), outFilter),
+			zapcore.NewCore(console, zapcore.AddSync(stdErr), errFilter),
+			zapcore.NewCore(console, zapcore.AddSync(file), zap.DebugLevel),
+		))
+	} else {
+		GlobalLogger = zap.New(zapcore.NewTee(
+			zapcore.NewCore(console, zapcore.AddSync(stdOut), outFilter),
+			zapcore.NewCore(console, zapcore.AddSync(stdErr), errFilter),
+		))
+	}
 }

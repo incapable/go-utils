@@ -3,8 +3,8 @@
 package file
 
 import (
-	"git.poofycow.com/mark/go-utils/logger"
-	"git.poofycow.com/mark/go-utils/program"
+	"github.com/incapable/go-utils/logger"
+	"github.com/incapable/go-utils/program"
 	"go.uber.org/zap"
 	"os"
 	"path/filepath"

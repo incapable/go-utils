@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"git.poofycow.com/mark/go-utils/program"
+	"github.com/incapable/go-utils/program"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"

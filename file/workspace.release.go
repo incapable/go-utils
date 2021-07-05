@@ -1,4 +1,4 @@
-// +build !test
+//go:build !test
 
 package file
 
@@ -29,7 +29,7 @@ func setupVars() {
 	}
 }
 
-// Creates a unique directory for the current job, and returns its name
+// PrepareWorkspace Creates a unique directory for the current job, and returns its name
 func PrepareWorkspace() (string, error) {
 	identifier, err := generateWorkspaceIdentifier()
 

@@ -1,4 +1,4 @@
-// Contains utility functions
+// Package file Contains utility functions
 package file
 
 import (

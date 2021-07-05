@@ -1,4 +1,4 @@
-// +build !test
+//go:build !test
 
 package program
 
@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// Executes a command, logs the output to the logger, and waits for completion
+// ExecuteAndWait Executes a command, logs the output to the logger, and waits for completion
 func ExecuteAndWait(command string, logger zap.Logger, args []string) (err error, errorText string) {
 	cmdStart := time.Now()
 

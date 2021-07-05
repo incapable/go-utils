@@ -3,14 +3,14 @@
 package file
 
 import (
-	logger2 "github.com/incapable/videosplicer/utils/logger"
+	"github.com/incapable/go-utils/logger"
 	"os"
 	"path/filepath"
 )
 
 // On init, try to prepare the work directory
 func setupVars() {
-	logger = logger2.GlobalLogger.Named("FileUtils")
+	log = logger.GlobalLogger.Named("FileUtils")
 
 	RemoveFiles = false
 }
